@@ -121,7 +121,7 @@ if __name__ == '__main__':
     while True:
         command = 'sudo'
         command += ' /home/hacku/rpi-rgb-led-matrix/examples-api-use/demo'
-        command += ' -D1'
+        command += ' -D 1'
         command += ' --led-cols=64'
         command += ' --led-rows=32'
         command += ' --led-chain=2'
