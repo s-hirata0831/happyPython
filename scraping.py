@@ -2,7 +2,7 @@ import subprocess
 import re
 
 def eprint(tline):
-    tline = tline.replase('\n', '')
+    tline = tline.replace('\n', '')
     param = tline.split('\t')
 
     try:
