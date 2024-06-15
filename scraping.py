@@ -69,7 +69,7 @@ def news():
 
     for elem in elems:
         nwt = '〜NEWS〜 '
-        nwt += elem.getText().replase('\n', '') + '\t255,255,255\t2'
+        nwt += elem.getText().replace('\n', '') + '\t255,255,255\t2'
         eprint(nwt)
         l += 1
         if l > 2:
