@@ -102,6 +102,22 @@ def weather():
 
     eprint(weather)
 
+def navi():
+    res = requests.get('http://barrierfree.on.arena.ne.jp/barrierfree/data/yohou/6120.html')
+    res.raise_for_status()
+    soup = bs4.BeautifulSoup(res.content, "html.parser")
+    elems = soup.select('em.title')
+
+    l = 0
+
+    for elem in elems:
+        nwt = '〜NEWS〜 '
+        nwt += elem.getText().replace('\n', '') + '\t255,255,255\t2'
+        eprint(nwt)
+        l += 1
+        if l > 2:
+            break
+
 def main():
     #テキストファイル読み込み
     f = open('display.txt', 'r', encoding='UTF-8')
@@ -112,7 +128,7 @@ def main():
             if '[NEWS]' in line:
                 news()
             elif '[WEATHER]' in line:
-                weather()
+                navi()
             else:
                 eprint(line)
         else:
