@@ -1,4 +1,3 @@
 KARAYABへようこそ！
 Pythonでウェブスクレイピングをしています。
 [NEWS]
-[WEATHER]
