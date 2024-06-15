@@ -13,7 +13,7 @@ def eprint(tline):
         if len(re.findall('[0-9]{1,3},[0-9]{1-3},[0-9]{1,3}', param[1])) == 0:
             parac = ''
         else:
-            parac = ' -C ' + param[1]
+            parac = ' -C' + param[1]
 
     except IndexError:
         parac = ''
@@ -25,7 +25,7 @@ def eprint(tline):
         if len(re.findall('[0-9]{1,2}', param[2])) == 0:
             paras = ''
         else:
-            paras = ' -s ' + param[2]
+            paras = ' -s' + param[2]
     except IndexError:
         paras = ''
 
@@ -36,7 +36,7 @@ def eprint(tline):
         if len(re.findall('[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}', param[3])) == 0:
             parab = ''
         else:
-            parab = ' -B ' + param[3]
+            parab = ' -B' + param[3]
     except IndexError:
         parab = ''
 
@@ -77,6 +77,31 @@ def news():
         if l > 2:
             break
 
+def weather():
+    res = requests.get('https://tenki.jp/forecast/6/29/6120/26202/')
+    res.raise_for_status()
+    soup = bs4.BeautifulSoup(res.content, "html.parser")
+    elems = soup.select('div.forecast-days-wrap')
+
+    weather = '天気予報 '
+
+    for elem in elems:
+        weather += elem.getText()
+
+    #取得したテキストを整形
+    weather = weather.replace(u'\xa0', '')
+    weather = weather.replace('\n', ' ')
+    weather = weather.replace('  ', ' ')
+    weather = re.sub(' {2,4}', ' ', weather)
+    weather = re.sub(r'降水確率 (.+?) (.+?) (.+?) (.+?) ', '降水確率 00-06(\\1) 06-12(\\2) 12-18(\\3) 18-24(\\4) ', weather)
+    weather = weather.replace('時間 00-06 06-12 12-18 18-24 ', '')
+    weather = weather.replace('(','(')
+    weather = weather.replace(')',')')
+    weather += ' :tenki.jp提供'
+    weather += '\t255,255,255\t2'
+
+    eprint(weather)
+
 def main():
     #テキストファイル読み込み
     f = open('display.txt', 'r', encoding='UTF-8')
@@ -86,6 +111,8 @@ def main():
         if line:
             if '[NEWS]' in line:
                 news()
+            elif '[WEATHER]' in line:
+                weather()
             else:
                 eprint(line)
         else:
