@@ -43,6 +43,8 @@ def eprint(tline):
     command = 'sudo'
     command += ' /home/hacku/rpi-rgb-led-matrix/examples-api-use/scrolling-text-example'
     command += ' -l1'
+    command += ' -s4'
+    command += ' -C0,255,255'
 
     command += parac
 
