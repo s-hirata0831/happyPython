@@ -88,6 +88,8 @@ def weather():
     for elem in elems:
         weather += elem.getText()
 
+    eprint(weather)
+    
     #取得したテキストを整形
     weather = weather.replace(u'\xa0', '')
     weather = weather.replace('\n', ' ')
