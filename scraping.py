@@ -88,14 +88,12 @@ def weather():
     for elem in elems:
         weather += elem.getText()
 
-    eprint(weather)
-    
     #取得したテキストを整形
     weather = weather.replace(u'\xa0', '')
     weather = weather.replace('\n', ' ')
     weather = weather.replace('  ', ' ')
     weather = re.sub(' {2,4}', ' ', weather)
-    weather = re.sub(r'降水確率 (.+?) (.+?) (.+?) (.+?) ', '降水確率 00-06(\\1) 06-12(\\2) 12-18(\\3) 18-24(\\4) ', weather)
+    weather = re.sub(r'降水確率 (.+?) (.+?) (.+?) (.+?) ', '降水確率 00-06(\1) 06-12(\2) 12-18(\3) 18-24(\4) ', weather)
     weather = weather.replace('時間 00-06 06-12 12-18 18-24 ', '')
     weather = weather.replace('(','(')
     weather = weather.replace(')',')')
