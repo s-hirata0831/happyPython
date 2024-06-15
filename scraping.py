@@ -26,7 +26,7 @@ def eprint(tline):
     command += ' --led-rows=32'
     command += ' --led-chain=2'
     command += ' --led-no-hardware-pulse'
-    command += ' --led-slowdown-gpio=2'
+    command += ' --led-slowdown-gpio=4'
     command += ' -f /home/hacku/Downloads/font/sazanami-20040629/sazanami-mincho.bdf '
     command += param[0]
     print(command)
@@ -42,8 +42,6 @@ def main():
         line = f.readline()
         if line:
             eprint(line)
-        else:
-            break
     f.close()
 
 if __name__ == '__main__':
